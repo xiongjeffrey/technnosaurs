@@ -1,12 +1,14 @@
 # technnosaurs!
 
-#DATABASE MANAGEMENT
+**DATABASE MANAGEMENT
+**
 
 We get a sample of media from each creator and tag the photos with some set of available characteristics. Each photographer has their own entry that is updated with each media's tags as they're inputted. We also store a list of available tags. Each row J of the database stores how many times each tag appears in creator J's profile.
 
 Each photographer receives their own ID that the photo information can be pulled with. People can also add their own tags that future photos can be tagged with and current photos can be updated with as well.
 
-#REC ALG
+**#REC ALG
+**
 
 User inputs a list of tags that they are looking for (a vector of 1's and 0's). We output a N number of recommendations (modifiable).
 
