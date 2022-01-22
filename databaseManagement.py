@@ -1,12 +1,16 @@
 import numpy as np
 
+
 global database
-database = []
+database = [] # matrix of how many times user's product contains a given tag
+                # row := each user
+                # column := each tag
 
 global idNums
-idNums = []
+idNums = [] # vector containing the ID of each user
+                # integer starting from 1
 
-global tagList
+global tagList # vector containing strings associated with each possible tag
 tagList = []
 
 def enter(id, tagList):
