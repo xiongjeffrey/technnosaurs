@@ -26,6 +26,6 @@ def addTag(tagName):
 
 def addTag(id, tagName):
     id[tagList.index(tagName)] += 1
-    
+
 def removeTag(id, tagName):
     id[tagList.index(tagName)] -= 1
