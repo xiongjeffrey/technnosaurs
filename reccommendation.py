@@ -1,14 +1,10 @@
 import math
 import numpy as np
+import database
 
-global database
-database = [] # matrix of how many times user's product contains a given tag
-                # row := each user
-                # column := each tag
-
-global idNums
-idNums = [] # vector containing the ID of each user
-                # integer starting from 1
+db = database.database
+idNums = database.idNums
+tagList = database.tagList
 
 global phi
 phi = 0.35 # each function generally also allows you to modify the phi threshold as needed
