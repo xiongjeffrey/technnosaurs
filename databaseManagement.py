@@ -23,3 +23,9 @@ def addTag(tagName):
     np.append(database, np.zeros((len(database), 1)), axis=1)
 
     return database
+
+def addTag(id, tagName):
+    id[tagList.index(tagName)] += 1
+    
+def removeTag(id, tagName):
+    id[tagList.index(tagName)] -= 1
