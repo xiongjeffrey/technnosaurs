@@ -7,31 +7,30 @@ idNums = database.idNums
 tagList = database.tagList
 
 global phi
-phi = 0.35 # each function generally also allows you to modify the phi threshold as needed
+phi = 0.1 # each function generally also allows you to modify the phi threshold as needed
 
-# define modified sigmoid function where all values less than phi are set to 0
-# sigmoid is also shifted right by 0.5
-    # function inputs should be greater than 0
-def sigmoid(x, phi):
-    if x < phi:
+# define modified sigmoid function where all outputs less than phi are set to 0
+def sigmoid(x, n, phi):
+    sig = (1 / (1 + math.exp(-1*x + (n**(1./2))))) # normalize center of function on the range of [0, n] is 0.5
+                                                        # n := number of media a creator has used
+    if sig < phi:
         return 0
-
-    else:
-        return (1 / (1 + math.exp(-x - 0.5)))
+    return sig
 
 # wrapper function for any given value of phi
-def sigmoidWrapper(phi):
+def sigmoidWrapper(phi, n):
 
     def retFunc(x):
-        return sigmoid(x, phi)
+        return sigmoid(x, phi, n)
 
     return retFunc
 
 # normalize values of a given matched user's tag profile
 def normalize(inputVec, phi, n):
-    retVec = np.array(retVec)/np.sqrt(n)
-    retVec = list(map(sigmoidWrapper(phi), inputVec))
-    
+    retVec = np.true_divide(np.array(inputVec), (n**(1./5))) # root is adjusted based on user preferences on granularity and option breadth
+                                                                # smaller the power, greater the granularity
+    retVec = list(map(sigmoidWrapper(phi, n), retVec))
+
     return retVec
 
 # normalizes database to be processed for recommendation
@@ -48,9 +47,11 @@ def recommend(userVec, findMat, topK):
     recVals = [0]*numMatches
 
     for i in range(numMatches):
-        recVals[i] = np.dot(userVec, numMatches[i])
+        recVals[i] = np.dot(userVec, findMat[i])
+
+    print(recVals)
 
     # find index of largest K values in recVals
-    # Complexity: O(n + k log k)
+    # Complexity: O(n)
     indices = np.argpartition(recVals, -1 * topK)[-1 * topK:]
-    return np.argsort(indices)
+    return indices # don't particularly care about order, just need them to display!
