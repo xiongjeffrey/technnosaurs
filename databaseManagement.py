@@ -2,7 +2,7 @@ import numpy as np
 
 
 global database
-database = [] # matrix of how many times user's product contains a given tag
+database = [] # matrix of how many times creator's product contains a given tag
                 # row := each user
                 # column := each tag
 
